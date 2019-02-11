@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="299dp"
+        android:layout_height="wrap_content"
+        android:text="hello world"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/msg_count"
+        app:layout_constraintEnd_toStartOf="@+id/msg_count"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/msg_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/msg"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/msg_users"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@+id/msg_count"
+        app:layout_constraintTop_toBottomOf="@+id/msg_count" />
+
+    <Button
+        android:id="@+id/btn_pos_response"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:text=""
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_neg_response"
+        app:layout_constraintStart_toStartOf="@+id/btn_neg_response"
+        app:layout_constraintTop_toBottomOf="@+id/msg" />
+
+    <Button
+        android:id="@+id/btn_neg_response"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:text=""
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/msg"
+        app:layout_constraintTop_toBottomOf="@+id/btn_pos_response"
+        tools:layout_editor_absoluteX="16dp" />
+
+</android.support.constraint.ConstraintLayout>

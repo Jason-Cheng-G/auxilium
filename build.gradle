@@ -1,0 +1,85 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+
+buildscript {
+
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.google.gms:google-services:3.1.0'
+
+
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+/*
+  Checkstyle Task
+*/
+
+task checkstyle(type: Checkstyle) {
+    configFile rootProject.file('config/checkstyle/checkstyle.xml')
+    source 'app/src/main/java'
+    classpath = files()
+}
+
+checkstyle {
+    toolVersion '8.2'
+    ignoreFailures = false
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.enabled true
+        xml.enabled false
+    }
+}
+
+
+/*
+  FindBugs Task
+*/
+findbugs {
+  ignoreFailures = false
+  toolVersion = "3.0.1"
+  sourceSets = [sourceSets.main]
+  reportsDir = file("$project.buildDir/reports/findbugs")
+  // report level attr is counter intuitive by "medium" it actually means I'll report
+  // on medium priority issues and upwards not that it is going to report less than say "high".
+  reportLevel = "medium"
+  // This will try to scan class files that we don't have access to source code
+  // but we are importing into our source code and will throw a warning.
+  // Unfortunately, reducing this value reduces the effectiveness of the analysis.
+  effort = "max"
+}
+
+task findbugs(type: FindBugs) {
+  excludeFilter = rootProject.file('config/findbugs/exclude.xml')
+  classes = fileTree('app/build/intermediates/classes/debug')
+  source = fileTree('app/src/main/java/')
+  classpath = files()
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        html.enabled true
+        xml.enabled false
+    }
+}

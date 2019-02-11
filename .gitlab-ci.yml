@@ -1,0 +1,69 @@
+image: ryp123/android-sdk:ubuntu
+
+
+# before_script and cache section based heavily on
+# https://stackoverflow.com/a/45855551/5960886
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+
+stages:
+  - build
+  - code-analysis
+  - test
+  - coverage-report
+  - deploy
+
+build:
+    stage: build
+    script: ./gradlew assemble
+
+code-analysis:
+  stage: code-analysis
+  script:
+    - ./gradlew lint
+    - ./gradlew checkstyle
+    - ./gradlew findbugs
+  artifacts:
+    when: always
+    paths:
+      - app/build/reports/lint-results.html
+      - build/reports/checkstyle/checkstyle.html
+      - build/reports/findbugs/findbugs.html
+    expire_in: 1 week
+
+test:
+    stage: test
+    script:
+      - ./gradlew test
+    artifacts:
+      when: on_failure
+      paths:
+        - app/build/reports/tests/testDebugUnitTest
+
+test-coverage-report:
+    stage: coverage-report
+    script:
+      - ./gradlew jacocoTestReport
+    artifacts:
+      when: on_success
+      paths:
+        - app/build/reports/jacoco/
+
+# The deployment stage is simply uploading the
+# apk file to gitlab. Depending on the situation this could
+# be changed to deploy to google play store.
+deploy:
+    stage: deploy
+    only:
+      - master
+    script:
+      - ./gradlew assembleRelease
+      - mv app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/auxilium-release.apk
+    artifacts:
+        paths:
+          - app/build/outputs/apk/release/auxilium-release.apk

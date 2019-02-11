@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ca.usask.auxilium">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".auth.SignInActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.VIEW"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="google.ca"
+                    android:scheme="https"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".auth.BaseActivity" />
+        <activity android:name=".auth.CreateRoomActivity"/>
+        <activity android:name=".auth.JoinActivity"/>
+        <activity android:name=".auth.WelcomeJoinCreateActivity"/>
+        <activity android:name="DrawerCircleActivity"/>
+        <activity android:name=".EditIndexStatusActivity"/>
+        <activity android:name=".auth.ProfileEditActivity"/>
+        <activity android:name=".ChatLanding"/>
+        <activity android:name=".IndexChat"/>
+        <activity android:name=".DirectChat"/>
+        <activity android:name=".HelpScreen"
+            android:label="Help and Resources" />
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
+
+
+        <service
+            android:name=".Services.MyFirebaseMessagingService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <service android:name=".Services.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data android:name="firebase_messaging_auto_init_enabled"
+                   android:value="false" />
+
+
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+</manifest>

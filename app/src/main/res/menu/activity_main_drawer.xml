@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single"
+           android:visible="true">
+        <item
+            android:id="@+id/nav_profile_page"
+            android:icon="@android:drawable/btn_star_big_on"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_indexstatus"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="Index Status" />
+        <item
+            android:id="@+id/nav_helpscreen"
+            android:icon="@android:drawable/ic_menu_help"
+            android:title="Help Information" />
+        <item
+            android:id="@+id/nav_indexchat"
+            android:icon="@android:drawable/ic_menu_send"
+            android:title="Index Chat" />
+        <item
+        android:id="@+id/nav_concernchat"
+        android:icon="@android:drawable/ic_menu_send"
+            android:visible="false"
+        android:title="Concerned Chat" />
+        <item
+            android:id="@+id/nav_invite"
+            android:icon="@android:drawable/ic_input_add"
+            android:title="Invite" />
+
+
+    </group>
+
+<item
+    android:title="Users in this circle">
+    <menu>
+    <group android:title="Users"
+           android:id="@+id/users"
+        android:visible="true">
+    </group>
+    </menu>
+</item>
+
+<item
+    android:title="Circles you are in"
+    android:visible="false"
+    >
+    <menu>
+    <group android:title="Circles"
+           android:id="@+id/circles">
+    </group>
+    </menu>
+
+</item>
+
+</menu>
